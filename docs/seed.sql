@@ -26,7 +26,6 @@ VALUES
     ('Ray-Ban'),
     ('Totem');
 
--- Nota: la url que se usa para los productos corresponde a la ruta webapp/assets/img/, en donde está la imagen
 INSERT INTO
     PRODUCTS (
         CATEGORY_ID,
@@ -40,11 +39,11 @@ INSERT INTO
         SHORT_DESCRIPTION
     )
 VALUES
-    -- Mochila de expedición, Categoría: 1 Expedición, Marca: 1 Head
+    -- Mochila de expedición, Categoría: Expedición, Marca: Head
     (
         2,
         2,
-        'mochila.jpg',
+        'https://c.pxhere.com/photos/e1/74/backpack_hiking_backpack_hiking_mountains_forest_vietnam_nature_water_bottle-1395064.jpg!d',
         15,
         'Mochila Head Trekking 60L',
         '{"capacidad": "60 Litros", "impermeable": true, "bolsillos": 5}',
@@ -56,11 +55,11 @@ VALUES
     o una escalada desafiante, esta mochila es tu compañera ideal.',
         'Mochila de expedición de 60L. Ideal para viajes largos.'
     ),
-    -- Bicicleta mountain bike Categoría: 3 Deporte, Marca: 3 Totem
+    -- Bicicleta mountain bike Categoría: Deporte, Marca: Totem
     (
         4,
         4,
-        'bicicleta.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Orbea_Occam_2020.jpg/1024px-Orbea_Occam_2020.jpg',
         5,
         'Bicicleta Totem W860 Aro 29',
         '{"aro": 29, "frenos": "Hidráulico", "velocidades": 27, "cuadro": "Aluminio"}',
@@ -72,11 +71,11 @@ VALUES
     ideal para explorar nuevos caminos y superar tus límites.',
         'Bicicleta de montaña rodado 29, 27 velocidades, frenos de disco hidráulicos'
     ),
-    --  Gafas de sol Categoría: 2 Accesorios, Marca: 2 Ray-Ban
+    --  Gafas de sol Categoría: Accesorios, Marca: Ray-Ban
     (
         3,
         3,
-        'gafas.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Beach-sand-summer-46710.jpg/1024px-Beach-sand-summer-46710.jpg',
         30,
         'Gafas Ray-Ban Aviator',
         '{"polarizado": true, "filtro": "UV400", "color_cristal": "Verde", "material_marco": "Metal"}',
@@ -84,11 +83,11 @@ VALUES
         'El diseño clásico que nunca pasa de moda. Protección total contra los rayos UV con un estilo inconfundible.',
         'Gafas de sol con protección UV400, lentes de policarbonato y marco de plástico'
     ),
-    -- Tienda de campaña (Categoría: 1 Expedición, Marca: 0 Maui
+    -- Tienda de campaña (Categoría: Expedición, Marca: Maui
     (
         2,
         1,
-        'tienda-campana.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Husky_Tent_near_scout_camp_near_Kouty%2C_T%C5%99eb%C3%AD%C4%8D_District.jpg/1024px-Husky_Tent_near_scout_camp_near_Kouty%2C_T%C5%99eb%C3%AD%C4%8D_District.jpg',
         8,
         'Carpa Maui 4 Personas',
         '{"capacidad": 4, "estaciones": 3, "columnas_agua": "3000mm", "peso": "4.5kg"}',
@@ -96,14 +95,14 @@ VALUES
         'Carpa tipo iglú resistente a vientos moderados y lluvias. Fácil de armar e ideal para acampar en familia o con amigos en la naturaleza.',
         'Tienda de campaña resistente a lluvias'
     ),
-    -- Chaqueta Categoría: 0 Ropa, Marca: 1 Head
+    -- Chaqueta Categoría: Ropa, Marca: Head
     (
         1,
         2,
-        'chaqueta.jpg',
+        'https://assets.thenorthface.eu/images/t_img/f_auto,h_462,e_sharpen:60,w_462/dpr_2.0/v1753206753/NF0A7QAW4GU-ALT20/Mens-Alta-Vista-Rain-Jacket.jpg',
         20,
-        'Chaqueta Head Cortavientos',
-        '{"talla": "L", "color": "Café", "impermeable": true, "bolsillos_con_cierre": 2}',
+        'Chaqueta The North Face Cortavientos',
+        '{"talla": "L", "color": "Gris", "impermeable": true, "bolsillos_con_cierre": 2}',
         45000.0,
         'Chaqueta ligera y resistente al agua, perfecta para actividades al aire libre o para protegerse del clima cambiante.',
         'Chaqueta resistente al agua'
@@ -112,11 +111,14 @@ VALUES
 INSERT INTO
     ORDERS (CUSTOMER_ID, CREATION_DATE, TOTAL)
 VALUES
-    (1, '2026-02-26', 520000);
+    (1, '2026-02-26', 520000),
+    (1, '2026-02-26', 85000);
 
 INSERT
     ORDERS_ITEM (ORDER_ID, PRODUCT_ID, UNIT_PRICE, QUANTITY)
 VALUES
     (1, 1, 85000, 1),
     (1, 2, 320000, 1),
-    (1, 3, 115000, 1);
+    (1, 3, 115000, 1),
+    (2, 1, 85000, 1);
+
