@@ -46,7 +46,7 @@ VALUES
         'https://c.pxhere.com/photos/e1/74/backpack_hiking_backpack_hiking_mountains_forest_vietnam_nature_water_bottle-1395064.jpg!d',
         15,
         'Mochila Head Trekking 60L',
-        '{"capacidad": "60 Litros", "impermeable": true, "bolsillos": 5}',
+        '{"capacidad": "60 Litros", "impermeable": "sí", "bolsillos": 5}',
         85000.0,
         'Esta mochila de expedición está diseñada para los aventureros más exigentes. Confeccionada en Nylon de alta resistencia, garantiza durabilidad y protección
     contra los elementos. Su capacidad de 60 litros te permite llevar todo lo necesario para tus travesías, mientras que su diseño ergonómico asegura una distribución
@@ -78,7 +78,7 @@ VALUES
         'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Beach-sand-summer-46710.jpg/1024px-Beach-sand-summer-46710.jpg',
         30,
         'Gafas Ray-Ban Aviator',
-        '{"polarizado": true, "filtro": "UV400", "color_cristal": "Verde", "material_marco": "Metal"}',
+        '{"polarizado": "sí", "filtro": "UV400", "color cristal": "Verde", "material marco": "Metal"}',
         115000.0,
         'El diseño clásico que nunca pasa de moda. Protección total contra los rayos UV con un estilo inconfundible.',
         'Gafas de sol con protección UV400, lentes de policarbonato y marco de plástico'
@@ -90,7 +90,7 @@ VALUES
         'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Husky_Tent_near_scout_camp_near_Kouty%2C_T%C5%99eb%C3%AD%C4%8D_District.jpg/1024px-Husky_Tent_near_scout_camp_near_Kouty%2C_T%C5%99eb%C3%AD%C4%8D_District.jpg',
         8,
         'Carpa Maui 4 Personas',
-        '{"capacidad": 4, "estaciones": 3, "columnas_agua": "3000mm", "peso": "4.5kg"}',
+        '{"capacidad": 4, "estaciones": 3, "columnas agua": "3000mm", "peso": "4.5kg"}',
         145000.0,
         'Carpa tipo iglú resistente a vientos moderados y lluvias. Fácil de armar e ideal para acampar en familia o con amigos en la naturaleza.',
         'Tienda de campaña resistente a lluvias'
@@ -102,7 +102,7 @@ VALUES
         'https://assets.thenorthface.eu/images/t_img/f_auto,h_462,e_sharpen:60,w_462/dpr_2.0/v1753206753/NF0A7QAW4GU-ALT20/Mens-Alta-Vista-Rain-Jacket.jpg',
         20,
         'Chaqueta The North Face Cortavientos',
-        '{"talla": "L", "color": "Gris", "impermeable": true, "bolsillos_con_cierre": 2}',
+        '{"talla": "L", "color": "Gris", "impermeable": "sí", "bolsillos con cierre": 2}',
         45000.0,
         'Chaqueta ligera y resistente al agua, perfecta para actividades al aire libre o para protegerse del clima cambiante.',
         'Chaqueta resistente al agua'
