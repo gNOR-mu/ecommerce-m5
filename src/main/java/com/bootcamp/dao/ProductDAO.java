@@ -1,0 +1,119 @@
+package com.bootcamp.dao;
+
+import com.bootcamp.config.DatabaseConnection;
+import com.bootcamp.dto.product.ProductInfoDTO;
+import com.bootcamp.dto.product.ProductResumeDTO;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class ProductDAO {
+    private static final Logger logger = LoggerFactory.getLogger(ProductDAO.class);
+    private final DatabaseConnection db = DatabaseConnection.getInstance();
+
+    /**
+     * Obtiene los productos más vendidos
+     *
+     * @return Una lista con los 3 productos más vendidos
+     */
+    public List<ProductResumeDTO> getTopProducts() {
+        List<ProductResumeDTO> topProductDTOS = new ArrayList<>();
+
+        String sql = """
+                    SELECT P.ID, P.NAME, P.SHORT_DESCRIPTION, P.URL_IMAGE, P.PRICE
+                    FROM PRODUCTS P
+                    JOIN ORDERS_ITEM OI ON P.ID = OI.PRODUCT_ID
+                    GROUP BY P.ID, P.NAME, P.SHORT_DESCRIPTION, P.URL_IMAGE
+                    ORDER BY SUM(OI.QUANTITY) DESC
+                    LIMIT 3;
+                """;
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                topProductDTOS.add(new ProductResumeDTO(
+                        rs.getLong("ID"),
+                        rs.getString("NAME"),
+                        rs.getString("SHORT_DESCRIPTION"),
+                        rs.getString("URL_IMAGE"),
+                        rs.getBigDecimal("PRICE")
+                ));
+            }
+        } catch (Exception e) {
+            logger.error("Error: ", e);
+        }
+        return topProductDTOS;
+    }
+
+    public List<ProductResumeDTO> findAllResume() {
+        List<ProductResumeDTO> products = new ArrayList<>();
+        String sql = """
+                SELECT ID, NAME, SHORT_DESCRIPTION, URL_IMAGE, PRICE
+                FROM PRODUCTS;
+                """;
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                products.add(new ProductResumeDTO(
+                        rs.getLong("ID"),
+                        rs.getString("NAME"),
+                        rs.getString("SHORT_DESCRIPTION"),
+                        rs.getString("URL_IMAGE"),
+                        rs.getBigDecimal("PRICE")
+                ));
+
+            }
+        } catch (Exception e) {
+            logger.error("Error: ", e);
+        }
+        return products;
+    }
+
+    public ProductInfoDTO findById(Long id) {
+        ProductInfoDTO productInfoDTO = null;
+
+        String sql = """
+                SELECT ID, PRICE, FEATURES, NAME, URL_IMAGE, DESCRIPTION, SHORT_DESCRIPTION
+                FROM PRODUCTS
+                WHERE ID = ?;
+                """;
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                productInfoDTO = new ProductInfoDTO();
+                productInfoDTO.setId(rs.getLong("ID"));
+                productInfoDTO.setPrice(rs.getBigDecimal("PRICE"));
+                productInfoDTO.setName(rs.getString("NAME"));
+                productInfoDTO.setUrlImage(rs.getString("URL_IMAGE"));
+                productInfoDTO.setDescription(rs.getString("DESCRIPTION"));
+                productInfoDTO.setShortDescription(rs.getString("SHORT_DESCRIPTION"));
+
+                ObjectMapper mapper = new ObjectMapper();
+                try {
+                    String featuresJSON = rs.getString("FEATURES");
+                    Map<String, Object> features = mapper.readValue(featuresJSON, new TypeReference<>() {});
+                    productInfoDTO.setFeatures(features);
+                } catch (Exception e) {
+                    logger.error("Error al obtener las características de: {}", productInfoDTO, e);
+                }
+            }
+
+
+        } catch (Exception e) {
+            logger.error("Error: ", e);
+        }
+
+        return productInfoDTO;
+    }
+}
