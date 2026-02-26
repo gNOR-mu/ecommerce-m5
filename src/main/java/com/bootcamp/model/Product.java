@@ -15,13 +15,14 @@ public class Product {
     private String name;
     private String urlImage;
     private String description;
+    private String shortDescription;
     private int stock;
 
     public Product() {
     }
 
     public Product(Long id, Long categoryId, Long brandId, BigDecimal price, List<String> features,
-                   String name, String urlImage, String description, int stock) {
+                   String name, String urlImage, String description, String shortDescription, int stock) {
         this.id = id;
         this.categoryId = categoryId;
         this.brandId = brandId;
@@ -30,6 +31,7 @@ public class Product {
         this.name = name;
         this.urlImage = urlImage;
         this.description = description;
+        this.shortDescription = shortDescription;
         this.stock = stock;
     }
 
