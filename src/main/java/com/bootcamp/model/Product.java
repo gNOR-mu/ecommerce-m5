@@ -3,6 +3,7 @@ package com.bootcamp.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Product {
 
@@ -11,7 +12,7 @@ public class Product {
     private Long brandId;
 
     private BigDecimal price;
-    private List<String> features;
+    private Map<String, Object> features;
     private String name;
     private String urlImage;
     private String description;
@@ -21,7 +22,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, Long categoryId, Long brandId, BigDecimal price, List<String> features,
+    public Product(Long id, Long categoryId, Long brandId, BigDecimal price, Map<String, Object> features,
                    String name, String urlImage, String description, String shortDescription, int stock) {
         this.id = id;
         this.categoryId = categoryId;
@@ -59,11 +60,11 @@ public class Product {
         this.price = price;
     }
 
-    public List<String> getFeatures() {
-        return new ArrayList<>(features);
+    public Map<String, Object>  getFeatures() {
+        return features;
     }
 
-    public void setFeatures(List<String> features) {
+    public void setFeatures(Map<String, Object> features) {
         this.features = features;
     }
 
@@ -105,5 +106,13 @@ public class Product {
 
     public void setBrandId(Long brandId) {
         this.brandId = brandId;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 }
