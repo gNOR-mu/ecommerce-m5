@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <!--    codificación UTF-8 para todos los .jsp, así evito errores de carácteres-->
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
+    <!--    nombre de la tienda-->
+    <context-param>
+        <param-name>ecommerceName</param-name>
+        <param-value>E-TravelGo</param-value>
+    </context-param>
+
+
+    <!--    servlet inicio-->
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>com.bootcamp.controller.IndexServlet</servlet-class>
+    </servlet>
+
+    <!--    servlet products-->
+    <servlet>
+        <servlet-name>ProductsServlet</servlet-name>
+        <servlet-class>com.bootcamp.controller.ProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern></url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ProductsServlet</servlet-name>
+        <url-pattern>/products</url-pattern>
+    </servlet-mapping>
+</web-app>
