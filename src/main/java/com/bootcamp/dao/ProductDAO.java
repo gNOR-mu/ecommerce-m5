@@ -1,8 +1,10 @@
 package com.bootcamp.dao;
 
 import com.bootcamp.config.DatabaseConnection;
+import com.bootcamp.dto.product.AdminProductListDTO;
 import com.bootcamp.dto.product.ProductInfoDTO;
 import com.bootcamp.dto.product.ProductResumeDTO;
+import com.bootcamp.model.Product;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -77,6 +79,42 @@ public class ProductDAO {
         return products;
     }
 
+    public List<AdminProductListDTO> findAll() {
+        List<AdminProductListDTO> products = new ArrayList<>();
+
+        String sql = """
+                SELECT 
+                    B.NAME AS B_NAME, 
+                    C.NAME AS C_NAME, 
+                    P.ID, 
+                    P.PRICE, 
+                    P.STOCK,
+                    P.NAME AS P_NAME
+                     
+                FROM PRODUCTS P
+                JOIN CATEGORIES C ON C.ID = P.CATEGORY_ID
+                JOIN BRANDS B ON B.ID = P.BRAND_ID;
+                """;
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                AdminProductListDTO product = new AdminProductListDTO();
+                product.setBrandName(rs.getString("B_NAME"));
+                product.setCategoryName(rs.getString("C_NAME"));
+                product.setId(rs.getLong("ID"));
+                product.setPrice(rs.getBigDecimal("PRICE"));
+                product.setName(rs.getString("P_NAME"));
+                product.setStock(rs.getInt("STOCK"));
+
+                products.add(product);
+            }
+        } catch (Exception e) {
+            logger.error("Error: ", e);
+        }
+        return products;
+    }
+
     public ProductInfoDTO findById(Long id) {
         ProductInfoDTO productInfoDTO = null;
 
@@ -102,7 +140,8 @@ public class ProductDAO {
                 ObjectMapper mapper = new ObjectMapper();
                 try {
                     String featuresJSON = rs.getString("FEATURES");
-                    Map<String, Object> features = mapper.readValue(featuresJSON, new TypeReference<>() {});
+                    Map<String, Object> features = mapper.readValue(featuresJSON, new TypeReference<>() {
+                    });
                     productInfoDTO.setFeatures(features);
                 } catch (Exception e) {
                     logger.error("Error al obtener las características de: {}", productInfoDTO, e);

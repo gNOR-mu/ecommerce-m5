@@ -1,6 +1,7 @@
 package com.bootcamp.service;
 
 import com.bootcamp.dao.ProductDAO;
+import com.bootcamp.dto.product.AdminProductListDTO;
 import com.bootcamp.dto.product.ProductInfoDTO;
 import com.bootcamp.dto.product.ProductResumeDTO;
 import com.bootcamp.model.Product;
@@ -16,6 +17,10 @@ public class ProductService {
 
     public List<ProductResumeDTO> findAllResume(){
         return productDAO.findAllResume();
+    }
+
+    public List<AdminProductListDTO> findAll(){
+        return  productDAO.findAll();
     }
 
     public ProductInfoDTO findById(Long id) {

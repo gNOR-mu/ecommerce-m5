@@ -32,6 +32,12 @@ https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
         <servlet-class>com.bootcamp.controller.ProductServlet</servlet-class>
     </servlet>
 
+    <!--    servlet admin productos-->
+    <servlet>
+        <servlet-name>AdminProductsServlet</servlet-name>
+        <servlet-class>com.bootcamp.controller.AdminProductServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern></url-pattern>
@@ -40,5 +46,10 @@ https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
     <servlet-mapping>
         <servlet-name>ProductsServlet</servlet-name>
         <url-pattern>/products</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AdminProductsServlet</servlet-name>
+        <url-pattern>/admin/products/*</url-pattern>
     </servlet-mapping>
 </web-app>

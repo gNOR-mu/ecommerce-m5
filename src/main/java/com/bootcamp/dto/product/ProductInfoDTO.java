@@ -3,6 +3,9 @@ package com.bootcamp.dto.product;
 import java.math.BigDecimal;
 import java.util.Map;
 
+/**
+ * DTO con la información de un producto
+ */
 public class ProductInfoDTO {
     private Long id;
     private BigDecimal price;
