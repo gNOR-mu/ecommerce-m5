@@ -11,23 +11,27 @@ import java.util.List;
 public class ProductService {
     private final ProductDAO productDAO = new ProductDAO();
 
-    public List<ProductResumeDTO> getTopProducts(){
+    public List<ProductResumeDTO> getTopProducts() {
         return productDAO.getTopProducts();
     }
 
-    public List<ProductResumeDTO> findAllResume(){
+    public List<ProductResumeDTO> findAllResume() {
         return productDAO.findAllResume();
     }
 
-    public List<AdminProductListDTO> findAll(){
-        return  productDAO.findAll();
+    public List<AdminProductListDTO> findAll() {
+        return productDAO.findAll();
     }
 
     public ProductInfoDTO findById(Long id) {
         return productDAO.findById(id);
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         productDAO.deleteById(id);
+    }
+
+    public List<AdminProductListDTO> search(String searchText) {
+        return productDAO.search(searchText);
     }
 }

@@ -24,10 +24,19 @@ public class AdminProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getPathInfo();
+        String action = req.getParameter("action");
 
 //        listar productos
         if (path == null || path.equals("/")) {
-            List<AdminProductListDTO> products = productService.findAll();
+            List<AdminProductListDTO> products;
+            String searchText = req.getParameter("searchText");
+
+            if (action != null && action.equalsIgnoreCase("search")
+                    && searchText != null && !searchText.isBlank()) {
+                products = productService.search(searchText);
+            } else {
+                products = productService.findAll();
+            }
 
             req.setAttribute("products", products);
             req.getRequestDispatcher("productList.jsp").forward(req, resp);
