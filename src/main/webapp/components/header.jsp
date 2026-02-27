@@ -1,6 +1,6 @@
 <header class="bg-black navbar navbar-expand-lg bd-navbar p-2 " data-bs-theme="dark">
     <div class="container bd-gutter flex-wrap flex-lg-nowrap">
-        <a class="navbar-brand" href=".">${initParam.ecommerceName}</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}">${initParam.ecommerceName}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -9,13 +9,13 @@
             <nav>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a id="nav-index" class="nav-link" aria-current="page" href=".">Inicio</a>
+                        <a id="nav-index" class="nav-link" aria-current="page" href="${pageContext.request.contextPath}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a id="nav-product" class="nav-link" href="products">Productos</a>
+                        <a id="nav-product" class="nav-link" href="${pageContext.request.contextPath}/products">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a id="nav-admin" class="nav-link" href="admin/products">ADMINISTRACIÓN</a>
+                        <a id="nav-admin" class="nav-link" href="${pageContext.request.contextPath}/admin/products">ADMINISTRACIÓN</a>
                     </li>
 <!--                    <li class="nav-item">-->
 <!--                        <a id="nav-contact" class="nav-link" href="contact">Contacto</a>-->
