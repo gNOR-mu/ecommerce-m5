@@ -9,7 +9,7 @@
     <%@ include file="/components/head.jsp" %>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- header -->
 <%@ include file="/components/header.jsp" %>
 
@@ -42,7 +42,7 @@
                         <form action="${pageContext.request.contextPath}/admin/products" method="POST"
                               onsubmit="return confirm('¿Estás seguro de que deseas eliminar ${product.name}? Esta acción no se puede deshacer.');">
 
-                            <input type="hidden" name="action" value="eliminar">
+                            <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="id" value="${product.id}">
 
                             <button type="submit" class="btn btn-sm btn-danger">

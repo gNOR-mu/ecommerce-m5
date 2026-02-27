@@ -155,4 +155,22 @@ public class ProductDAO {
 
         return productInfoDTO;
     }
+
+    /**
+     * Elimina un producto
+     *
+     * @param id Id del producto a eliminar
+     */
+    public void deleteById(Long id) {
+        String sql = "DELETE FROM PRODUCTS WHERE ID = ?";
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setLong(1, id);
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            logger.error("Error: ", e);
+        }
+    }
 }
