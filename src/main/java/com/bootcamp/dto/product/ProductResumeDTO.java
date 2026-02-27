@@ -3,7 +3,7 @@ package com.bootcamp.dto.product;
 import java.math.BigDecimal;
 
 /**
- * DTO para manejar a los mejores productos
+ * DTO con información simplificada de un producto
  */
 public class ProductResumeDTO {
     private Long id;

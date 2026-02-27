@@ -14,6 +14,9 @@
                     <li class="nav-item">
                         <a id="nav-product" class="nav-link" href="products">Productos</a>
                     </li>
+                    <li class="nav-item">
+                        <a id="nav-admin" class="nav-link" href="admin/products">ADMINISTRACIÓN</a>
+                    </li>
 <!--                    <li class="nav-item">-->
 <!--                        <a id="nav-contact" class="nav-link" href="contact">Contacto</a>-->
 <!--                    </li>-->
