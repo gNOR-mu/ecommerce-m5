@@ -26,4 +26,8 @@ public class ProductService {
     public ProductInfoDTO findById(Long id) {
         return productDAO.findById(id);
     }
+
+    public void deleteById(Long id){
+        productDAO.deleteById(id);
+    }
 }
