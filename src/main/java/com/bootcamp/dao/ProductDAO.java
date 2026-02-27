@@ -83,14 +83,13 @@ public class ProductDAO {
         List<AdminProductListDTO> products = new ArrayList<>();
 
         String sql = """
-                SELECT 
-                    B.NAME AS B_NAME, 
-                    C.NAME AS C_NAME, 
-                    P.ID, 
-                    P.PRICE, 
+                SELECT
+                    B.NAME AS B_NAME,
+                    C.NAME AS C_NAME,
+                    P.ID,
+                    P.PRICE,
                     P.STOCK,
                     P.NAME AS P_NAME
-                     
                 FROM PRODUCTS P
                 JOIN CATEGORIES C ON C.ID = P.CATEGORY_ID
                 JOIN BRANDS B ON B.ID = P.BRAND_ID;
@@ -172,5 +171,49 @@ public class ProductDAO {
         } catch (Exception e) {
             logger.error("Error: ", e);
         }
+    }
+
+    public List<AdminProductListDTO> search(String searchText) {
+        List<AdminProductListDTO> products = new ArrayList<>();
+        String searchParam = "%" + searchText + "%";
+
+        String sql = """
+                SELECT
+                        B.NAME AS B_NAME,
+                        C.NAME AS C_NAME,
+                        P.ID,
+                        P.PRICE,
+                        P.STOCK,
+                        P.NAME AS P_NAME
+                
+                    FROM PRODUCTS P
+                    JOIN CATEGORIES C ON C.ID = P.CATEGORY_ID
+                    JOIN BRANDS B ON B.ID = P.BRAND_ID
+                    WHERE P.NAME LIKE ?
+                    OR C.NAME LIKE ?;
+                """;
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setString(1, searchParam);
+            ps.setString(2, searchParam);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                AdminProductListDTO product = new AdminProductListDTO();
+                product.setBrandName(rs.getString("B_NAME"));
+                product.setCategoryName(rs.getString("C_NAME"));
+                product.setId(rs.getLong("ID"));
+                product.setPrice(rs.getBigDecimal("PRICE"));
+                product.setName(rs.getString("P_NAME"));
+                product.setStock(rs.getInt("STOCK"));
+
+                products.add(product);
+            }
+        } catch (Exception e) {
+            logger.error("Error al intentar buscar {}", searchText, e);
+        }
+
+        return products;
+
     }
 }
