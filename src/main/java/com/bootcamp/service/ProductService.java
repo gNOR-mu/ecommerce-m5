@@ -45,5 +45,6 @@ public class ProductService {
     }
 
     public void edit(ProductFormDTO product) {
+        productDAO.edit(product);
     }
 }

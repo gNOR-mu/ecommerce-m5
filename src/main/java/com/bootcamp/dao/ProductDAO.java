@@ -299,4 +299,39 @@ public class ProductDAO {
             logger.error("Error: ", e);
         }
     }
+
+    public void edit(ProductFormDTO product) {
+        String sql = """
+                UPDATE PRODUCTS SET
+                    BRAND_ID = ?,
+                    CATEGORY_ID = ?,
+                    URL_IMAGE = ?,
+                    STOCK = ?,
+                    NAME = ?,
+                    FEATURES = ?,
+                    PRICE = ?,
+                    DESCRIPTION = ?,
+                    SHORT_DESCRIPTION = ?
+                WHERE ID = ?;
+                
+                """;
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setLong(1, product.getBrandId());
+            ps.setLong(2, product.getCategoryId());
+            ps.setString(3, product.getUrlImage());
+            ps.setInt(4, product.getStock());
+            ps.setString(5, product.getName());
+            ps.setString(6, product.getFeatures());
+            ps.setBigDecimal(7, product.getPrice());
+            ps.setString(8, product.getDescription());
+            ps.setString(9, product.getShortDescription());
+
+            ps.setLong(10, product.getId());
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            logger.error("Error: ", e);
+        }
+    }
 }
