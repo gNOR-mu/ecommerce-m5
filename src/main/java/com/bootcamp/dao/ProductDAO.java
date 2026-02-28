@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -114,7 +115,52 @@ public class ProductDAO {
         return products;
     }
 
-    public ProductInfoDTO findById(Long id) {
+    public Product findById(Long id) {
+        Product product = null;
+
+        String sql = """
+                SELECT *
+                FROM PRODUCTS
+                WHERE ID = ?;
+                """;
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+
+
+            while (rs.next()) {
+                ObjectMapper mapper = new ObjectMapper();
+                try {
+                    String featuresJSON = rs.getString("FEATURES");
+                    Map<String, Object> features = mapper.readValue(featuresJSON, new TypeReference<>() {
+                    });
+
+                    product = new Product(
+                            rs.getLong("ID"),
+                            rs.getLong("CATEGORY_ID"),
+                            rs.getLong("BRAND_ID"),
+                            rs.getBigDecimal("PRICE"),
+                            features,
+                            rs.getString("NAME"),
+                            rs.getString("URL_IMAGE"),
+                            rs.getString("DESCRIPTION"),
+                            rs.getString("SHORT_DESCRIPTION"),
+                            rs.getInt("STOCK"));
+
+                } catch (Exception e) {
+                    logger.error("Error al obtener las características de: {}", product, e);
+                }
+            }
+
+        } catch (Exception e) {
+            logger.error("Error: ", e);
+        }
+
+        return product;
+    }
+
+    public ProductInfoDTO findInfoById(Long id) {
         ProductInfoDTO productInfoDTO = null;
 
         String sql = """

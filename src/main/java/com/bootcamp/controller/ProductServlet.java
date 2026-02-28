@@ -26,7 +26,7 @@ private ProductService productService;
 
         //en caso de que haya id lo mando a la página del producto
         if(idParam != null && !idParam.isBlank()){
-            ProductInfoDTO product = productService.findById(Long.parseLong(idParam));
+            ProductInfoDTO product = productService.findInfoById(Long.parseLong(idParam));
 
             req.setAttribute("product", product);
             req.getRequestDispatcher("productId.jsp").forward(req, resp);
