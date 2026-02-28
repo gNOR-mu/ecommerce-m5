@@ -83,7 +83,7 @@
             <!--            DESCRIPCIÓN LARGA-->
             <div class="mb-3">
                 <label class="fw-bold">Descripción</label>
-                <input type="text" name="description" value="${product.description}" class="form-control" required>
+                <textarea type="text" name="description" class="form-control" required>${product.description}</textarea>
             </div>
 
             <!--            DESCRIPCIÓN CORTA-->
