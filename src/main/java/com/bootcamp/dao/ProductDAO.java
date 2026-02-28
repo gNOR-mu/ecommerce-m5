@@ -262,4 +262,44 @@ public class ProductDAO {
         return products;
 
     }
+
+    public void save(Product product) {
+
+        String sql = """
+                INSERT INTO PRODUCTS (
+                        BRAND_ID,
+                        CATEGORY_ID,
+                        URL_IMAGE,
+                        STOCK,
+                        NAME,
+                        FEATURES,
+                        PRICE,
+                        DESCRIPTION,
+                        SHORT_DESCRIPTION
+                    )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """;
+
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            // TODO mover a service
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonFeatures = mapper.writeValueAsString(product.getFeatures());
+
+            ps.setLong(1, product.getBrandId());
+            ps.setLong(2, product.getCategoryId());
+            ps.setString(3, product.getUrlImage());
+            ps.setInt(4, product.getStock());
+            ps.setString(5, product.getName());
+            ps.setString(6, jsonFeatures);
+            ps.setBigDecimal(7, product.getPrice());
+            ps.setString(8, product.getDescription());
+            ps.setString(9, product.getShortDescription());
+
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            logger.error("Error: ", e);
+        }
+    }
 }

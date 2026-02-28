@@ -1,6 +1,7 @@
 package com.bootcamp.model;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Product {
@@ -10,7 +11,7 @@ public class Product {
     private Long brandId;
 
     private BigDecimal price;
-    private Map<String, Object> features;
+    private Map<String, Object> features = new HashMap<>();
     private String name;
     private String urlImage;
     private String description;

@@ -38,4 +38,11 @@ public class ProductService {
     public List<AdminProductListDTO> search(String searchText) {
         return productDAO.search(searchText);
     }
+
+    public void create(Product product) {
+        productDAO.save(product);
+    }
+
+    public void edit(Product product) {
+    }
 }
