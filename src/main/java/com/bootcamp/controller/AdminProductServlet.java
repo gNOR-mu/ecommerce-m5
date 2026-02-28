@@ -82,8 +82,6 @@ public class AdminProductServlet extends HttpServlet {
                         product.setId(Long.parseLong(idParam));
                     }
 
-                    var features = product.getFeatures();
-
                     String[] keys = req.getParameterValues("featureKeys");
                     String[] values = req.getParameterValues("featureValues");
 
@@ -142,7 +140,7 @@ public class AdminProductServlet extends HttpServlet {
         String idParam = req.getParameter("id");
 
         if (idParam == null || idParam.isBlank()) {
-            logger.info("INFO (edit): Acceso a editar con una id inválida '{}'", idParam);
+            logger.info("INFO (edit): Intento de editar con una id inválida '{}'", idParam);
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Id inválida");
             return;
         }
@@ -155,7 +153,7 @@ public class AdminProductServlet extends HttpServlet {
             req.setAttribute("brands", brandService.findAll());
             req.getRequestDispatcher("productForm.jsp").forward(req, resp);
         } catch (NumberFormatException e) {
-            logger.error("Error (edit) al intentar convenrtir la id a número {}:", idParam, e);
+            logger.error("Error (edit) al intentar convertir la id a número {}:", idParam, e);
 
         } catch (Exception e) {
             logger.error("Error (edit):", e);
