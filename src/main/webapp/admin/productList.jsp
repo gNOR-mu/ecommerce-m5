@@ -20,13 +20,12 @@
         <h3 class="d-flex align-items-center mb-4">
             <c:choose>
                 <c:when test="${not empty param.searchText}">
-                   ${fn:length(products)} Resultados para: &nbsp;
+                    ${fn:length(products)} Resultados para: &nbsp;
                     <a href="${pageContext.request.contextPath}/admin/products"
                        title="Volver"
                        class="badge bg-dark rounded-pill text-bg-primary text-decoration-none d-inline-flex
                        align-items-center px-3 py-2 shadow-sm">
-
-                        <span class="fw-normal me-2"></span>
+                        <span class="fw-normal me-2">${param.searchText}</span>
                         <i class="bi bi-x-circle-fill text-white opacity-75"></i>
                     </a>
                 </c:when>
@@ -34,6 +33,11 @@
                     Lista de Productos
                 </c:otherwise>
             </c:choose>
+
+            <a href="${pageContext.request.contextPath}/admin/products?action=create"
+               class="btn btn-success shadow-sm ms-auto">
+                <i class="bi bi-plus-circle me-2"></i>Agregar Producto
+            </a>
         </h3>
 
         <form method="get" action="${pageContext.request.contextPath}/admin/products" class="mb-3">
@@ -70,7 +74,7 @@
                             <i class="bi bi-eye"></i>
                         </a>
                         <a class="btn" title="Editar"
-                           href="${pageContext.request.contextPath}/admin/products/editar?id=${product.id}}">
+                           href="${pageContext.request.contextPath}/admin/products?action=edit&id=${product.id}">
                             <i class="bi bi-pencil"></i>
                         </a>
 

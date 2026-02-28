@@ -20,8 +20,16 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, Long categoryId, Long brandId, BigDecimal price, Map<String, Object> features,
-                   String name, String urlImage, String description, String shortDescription, int stock) {
+    public Product(Long id,
+                   Long categoryId,
+                   Long brandId,
+                   BigDecimal price,
+                   Map<String, Object> features,
+                   String name,
+                   String urlImage,
+                   String description,
+                   String shortDescription,
+                   int stock) {
         this.id = id;
         this.categoryId = categoryId;
         this.brandId = brandId;
@@ -58,7 +66,7 @@ public class Product {
         this.price = price;
     }
 
-    public Map<String, Object>  getFeatures() {
+    public Map<String, Object> getFeatures() {
         return features;
     }
 

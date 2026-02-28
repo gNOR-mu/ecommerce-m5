@@ -23,7 +23,11 @@ public class ProductService {
         return productDAO.findAll();
     }
 
-    public ProductInfoDTO findById(Long id) {
+    public ProductInfoDTO findInfoById(Long id) {
+        return productDAO.findInfoById(id);
+    }
+
+    public Product findById(Long id){
         return productDAO.findById(id);
     }
 
