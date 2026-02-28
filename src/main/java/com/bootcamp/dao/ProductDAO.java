@@ -2,6 +2,7 @@ package com.bootcamp.dao;
 
 import com.bootcamp.config.DatabaseConnection;
 import com.bootcamp.dto.product.AdminProductListDTO;
+import com.bootcamp.dto.product.ProductFormDTO;
 import com.bootcamp.dto.product.ProductInfoDTO;
 import com.bootcamp.dto.product.ProductResumeDTO;
 import com.bootcamp.model.Product;
@@ -263,7 +264,7 @@ public class ProductDAO {
 
     }
 
-    public void save(Product product) {
+    public void save(ProductFormDTO product) {
 
         String sql = """
                 INSERT INTO PRODUCTS (
@@ -281,16 +282,12 @@ public class ProductDAO {
                 """;
 
         try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
-            // TODO mover a service
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonFeatures = mapper.writeValueAsString(product.getFeatures());
-
             ps.setLong(1, product.getBrandId());
             ps.setLong(2, product.getCategoryId());
             ps.setString(3, product.getUrlImage());
             ps.setInt(4, product.getStock());
             ps.setString(5, product.getName());
-            ps.setString(6, jsonFeatures);
+            ps.setString(6, product.getFeatures());
             ps.setBigDecimal(7, product.getPrice());
             ps.setString(8, product.getDescription());
             ps.setString(9, product.getShortDescription());

@@ -1,12 +1,14 @@
 package com.bootcamp.controller;
 
 import com.bootcamp.dto.product.AdminProductListDTO;
+import com.bootcamp.dto.product.ProductFormDTO;
 import com.bootcamp.model.Brand;
 import com.bootcamp.model.Category;
 import com.bootcamp.model.Product;
 import com.bootcamp.service.BrandService;
 import com.bootcamp.service.CategoryService;
 import com.bootcamp.service.ProductService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -64,8 +66,9 @@ public class AdminProductServlet extends HttpServlet {
             }
             case "save" -> {
                 try {
+                    ObjectMapper mapper = new ObjectMapper();
                     String idParam = req.getParameter("id");
-                    Product product = new Product();
+                    ProductFormDTO product = new ProductFormDTO();
 
                     product.setCategoryId(Long.parseLong(req.getParameter("categoryId")));
                     product.setBrandId(Long.parseLong(req.getParameter("brandId")));
@@ -75,7 +78,7 @@ public class AdminProductServlet extends HttpServlet {
                     product.setDescription(req.getParameter("description"));
                     product.setShortDescription(req.getParameter("shortDescription"));
 
-                    if(idParam != null && !idParam.isEmpty()){
+                    if (idParam != null && !idParam.isEmpty()) {
                         product.setId(Long.parseLong(idParam));
                     }
 
@@ -84,17 +87,22 @@ public class AdminProductServlet extends HttpServlet {
                     String[] keys = req.getParameterValues("featureKeys");
                     String[] values = req.getParameterValues("featureValues");
 
+                    Map<String, Object> featuresMap = new HashMap<>();
                     if (keys != null && values != null) {
                         for (int i = 0; i < keys.length; i++) {
-                            features.put(keys[i], values[i]);
+                            featuresMap.put(keys[i], values[i]);
                         }
                     }
 
-                    if(product.getId() == null){
+                    String jsonFeatures = mapper.writeValueAsString(featuresMap);
+                    product.setFeatures(jsonFeatures);
+
+                    if (product.getId() == null) {
                         productService.create(product);
-                    }else{
+                    } else {
                         productService.edit(product);
                     }
+
                 } catch (Exception e) {
                     logger.error("Error (create):", e);
                 }

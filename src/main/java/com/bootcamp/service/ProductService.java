@@ -2,6 +2,7 @@ package com.bootcamp.service;
 
 import com.bootcamp.dao.ProductDAO;
 import com.bootcamp.dto.product.AdminProductListDTO;
+import com.bootcamp.dto.product.ProductFormDTO;
 import com.bootcamp.dto.product.ProductInfoDTO;
 import com.bootcamp.dto.product.ProductResumeDTO;
 import com.bootcamp.model.Product;
@@ -39,10 +40,10 @@ public class ProductService {
         return productDAO.search(searchText);
     }
 
-    public void create(Product product) {
+    public void create(ProductFormDTO product) {
         productDAO.save(product);
     }
 
-    public void edit(Product product) {
+    public void edit(ProductFormDTO product) {
     }
 }
