@@ -8,7 +8,7 @@
     <title>Inicio</title>
     <%@ include file="/components/head.jsp" %>
 
-    <link rel="stylesheet" href="assets/css/index.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css">
 
 </head>
 
