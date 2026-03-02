@@ -24,7 +24,7 @@
             <div class="col">
                 <h1 class="col">${product.name}</h1>
                 <h5 class="col">${product.shortDescription}</h5>
-                <h6 class="col">${product.price}</h6>
+                <h6 class="col"><span><strong><fmt:formatNumber value="${product.price}" type="currency"/></strong></span>
             </div>
         </div>
 
