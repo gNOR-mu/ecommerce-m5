@@ -24,13 +24,13 @@
                     <a href="${pageContext.request.contextPath}/products?id=${product.id}"
                        class="card p-0 product-card h-100 text-decoration-none text-dark d-flex flex-column">
 
-                        <img src="${product.urlImage}"
+                        <img src="<c:out value="${product.urlImage}"/>"
                              class="card-img-top product-card-img"
-                             alt="Producto: ${product.name}">
+                             alt="Producto: <c:out value="${product.name}"/>">
 
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${product.name}</h5>
-                            <p class="card-text">${product.shortDescription}</p>
+                            <h5 class="card-title"><c:out value="${product.name}"/></h5>
+                            <p class="card-text"><c:out value="${product.shortDescription}"/></p>
 
                             <div class="mt-auto text-start">
                             <span class="text-primary fs-5">

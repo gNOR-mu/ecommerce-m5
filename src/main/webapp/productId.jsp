@@ -6,7 +6,7 @@
 <html lang="es">
 
 <head>
-    <title>${product.name}</title>
+    <title><c:out value="${product.name}"/></title>
     <%@ include file="/components/head.jsp" %>
 
     <link rel="stylesheet" href="assets/css/productId.css">
@@ -20,11 +20,11 @@
 <main>
     <section class="container my-5">
         <div class="row mx-0 gy-sm-3">
-            <img src="${product.urlImage}" class="img-product shadow-lg p-0">
+            <img src="<c:out value="${product.urlImage}"/>" class="img-product shadow-lg p-0">
             <div class="col">
-                <h1 class="col">${product.name}</h1>
-                <h5 class="col">${product.shortDescription}</h5>
-                <h6 class="col"><span><strong><fmt:formatNumber value="${product.price}" type="currency"/></strong></span>
+                <h1 class="col"><c:out value="${product.name}"/></h1>
+                <h5 class="col"><c:out value="${product.shortDescription}"/></h5>
+                <h6 class="col"><strong><fmt:formatNumber value="${product.price}" type="currency"/></strong></span>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 </h2>
                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                     <div class="accordion-body">
-                        <span>${product.description}</span>
+                        <span><c:out value="${product.description}"/></span>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                         <ul class="list-group list-group-flush mb-4 ms-3">
                             <c:forEach items="${product.features}" var="feature">
                                 <li>
-                                    <strong class="text-capitalize">${feature.key}: </strong> <span class="text-capitalize">${feature.value}</span>
+                                    <strong class="text-capitalize"><c:out value="${feature.key}"/>: </strong> <span class="text-capitalize"><c:out value="${feature.value}"/></span>
                                 </li>
                             </c:forEach>
                         </ul>

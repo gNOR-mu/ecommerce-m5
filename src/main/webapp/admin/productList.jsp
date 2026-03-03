@@ -19,14 +19,14 @@
     <section class="container my-5">
        <c:if test="${not empty sessionScope.successMessage}">
             <div class="alert alert-success" role="alert">
-               ${sessionScope.successMessage}
+               <c:out value="${sessionScope.successMessage}"/>
            </div>
            <c:remove var="successMessage" scope="session" />
        </c:if>
 
        <c:if test="${not empty sessionScope.errorMessage}">
             <div class="alert alert-danger" role="alert">
-               ${sessionScope.errorMessage}
+               <c:out value="${sessionScope.errorMessage}"/>
            </div>
            <c:remove var="errorMessage" scope="session" />
        </c:if>
@@ -39,7 +39,7 @@
                        title="Volver"
                        class="badge bg-dark rounded-pill text-bg-primary text-decoration-none d-inline-flex
                        align-items-center px-3 py-2 shadow-sm">
-                        <span class="fw-normal me-2">${param.searchText}</span>
+                        <span class="fw-normal me-2"><c:out value="${param.searchText}"/></span>
                         <i class="bi bi-x-circle-fill text-white opacity-75"></i>
                     </a>
                 </c:when>
@@ -78,11 +78,11 @@
             <tbody>
             <c:forEach items="${products}" var="product">
                 <tr>
-                    <td>${product.name}</td>
-                    <td>${product.brandName}</td>
-                    <td>${product.categoryName}</td>
+                    <td><c:out value="${product.name}"/></td>
+                    <td><c:out value="${product.brandName}"/></td>
+                    <td><c:out value="${product.categoryName}"/></td>
                     <td><fmt:formatNumber value="${product.price}" type="currency"/></td>
-                    <td>${product.stock}</td>
+                    <td><c:out value="${product.stock}"/></td>
                     <td class="d-flex justify-content-center">
                         <a class="btn" title="Ver"
                            href="${pageContext.request.contextPath}/products?id=${product.id}">
@@ -94,7 +94,7 @@
                         </a>
 
                         <form action="${pageContext.request.contextPath}/admin/products" method="POST"
-                              onsubmit="return confirm('¿Estás seguro de que deseas eliminar ${product.name}? Esta acción no se puede deshacer.');">
+                              onsubmit="return confirm('¿Estás seguro de que deseas eliminar <c:out value="${product.name}"/>? Esta acción no se puede deshacer.');">
 
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="id" value="${product.id}">
