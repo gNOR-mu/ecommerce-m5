@@ -15,8 +15,22 @@
 <%@ include file="/components/header.jsp" %>
 
 <main class="container-fluid p-0 ">
-
+    <!-- mensaje de error -->
     <section class="container my-5">
+       <c:if test="${not empty sessionScope.successMessage}">
+            <div class="alert alert-success" role="alert">
+               ${sessionScope.successMessage}
+           </div>
+           <c:remove var="successMessage" scope="session" />
+       </c:if>
+
+       <c:if test="${not empty sessionScope.errorMessage}">
+            <div class="alert alert-danger" role="alert">
+               ${sessionScope.errorMessage}
+           </div>
+           <c:remove var="errorMessage" scope="session" />
+       </c:if>
+
         <h3 class="d-flex align-items-center mb-4">
             <c:choose>
                 <c:when test="${not empty param.searchText}">
@@ -48,6 +62,7 @@
             </div>
         </form>
 
+
         <!--        Tabla de productos-->
         <table class="table table-hover">
             <thead>
@@ -66,7 +81,7 @@
                     <td>${product.name}</td>
                     <td>${product.brandName}</td>
                     <td>${product.categoryName}</td>
-                    <td>${product.price}</td>
+                    <td><fmt:formatNumber value="${product.price}" type="currency"/></td>
                     <td>${product.stock}</td>
                     <td class="d-flex justify-content-center">
                         <a class="btn" title="Ver"

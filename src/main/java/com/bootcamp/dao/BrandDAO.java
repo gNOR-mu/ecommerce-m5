@@ -33,4 +33,16 @@ public class BrandDAO {
 
         return brands;
     }
+
+    public boolean existsById(Long id) {
+        String sql = "SELECT 1 FROM BRANDS WHERE ID = ?";
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            logger.error("Error: ", e);
+            return false;
+        }
+    }
 }

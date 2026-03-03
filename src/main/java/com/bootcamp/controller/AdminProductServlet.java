@@ -28,6 +28,9 @@ public class AdminProductServlet extends HttpServlet {
     private BrandService brandService;
     private CategoryService categoryService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void init() throws ServletException {
         productService = new ProductService();
@@ -35,10 +38,12 @@ public class AdminProductServlet extends HttpServlet {
         categoryService = new CategoryService();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-
         switch (action) {
             case null -> list(req, resp);
             case "search" -> search(req, resp);
@@ -49,6 +54,9 @@ public class AdminProductServlet extends HttpServlet {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -62,6 +70,7 @@ public class AdminProductServlet extends HttpServlet {
 
                 } catch (Exception e) {
                     logger.error("Error al intentar eliminar con una 'id' = '{}'", idParam, e);
+                    req.setAttribute("errorMessage", "ID inválida");
                 }
             }
             case "save" -> {
@@ -100,19 +109,24 @@ public class AdminProductServlet extends HttpServlet {
                     } else {
                         productService.edit(product);
                     }
-
+                    req.getSession().setAttribute("successMessage", "Producto guardado correctamente.");
                 } catch (Exception e) {
                     logger.error("Error (create):", e);
+                    req.getSession().setAttribute("errorMessage", "Error al guardar el producto: " + e.getMessage());
                 }
 
+                resp.sendRedirect(req.getContextPath() + "/admin/products");
             }
         }
-
-
-        resp.sendRedirect(req.getContextPath() + "/admin/products");
-
     }
 
+    /**
+     * Realiza una búsqueda de productos, basado en los campos searchText, utiliza productList.jsp
+     * @param req Request
+     * @param resp Response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<AdminProductListDTO> products;
         String searchText = req.getParameter("searchText");
@@ -122,6 +136,13 @@ public class AdminProductServlet extends HttpServlet {
         req.getRequestDispatcher("productList.jsp").forward(req, resp);
     }
 
+    /**
+     * Realiza una búsqueda de todos los productos, utiliza productList.jsp
+     * @param req Request
+     * @param resp Response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<AdminProductListDTO> products;
         products = productService.findAll();
@@ -129,6 +150,14 @@ public class AdminProductServlet extends HttpServlet {
         req.getRequestDispatcher("productList.jsp").forward(req, resp);
     }
 
+    /**
+     * Utiliza productForm.jsp para crear una nueva categoría
+     *
+     * @param req Request
+     * @param resp Response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void create(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("categories", categoryService.findAll());
         req.setAttribute("brands", brandService.findAll());
@@ -136,12 +165,18 @@ public class AdminProductServlet extends HttpServlet {
         req.getRequestDispatcher("productForm.jsp").forward(req, resp);
     }
 
+    /**
+     *
+     * @param req Request
+     * @param resp Response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idParam = req.getParameter("id");
 
         if (idParam == null || idParam.isBlank()) {
             logger.info("INFO (edit): Intento de editar con una id inválida '{}'", idParam);
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Id inválida");
             return;
         }
 
@@ -154,9 +189,11 @@ public class AdminProductServlet extends HttpServlet {
             req.getRequestDispatcher("productForm.jsp").forward(req, resp);
         } catch (NumberFormatException e) {
             logger.error("Error (edit) al intentar convertir la id a número {}:", idParam, e);
+            resp.sendRedirect(req.getContextPath() + "/admin/products");
 
         } catch (Exception e) {
             logger.error("Error (edit):", e);
+            resp.sendRedirect(req.getContextPath() + "/admin/products");
         }
     }
 
