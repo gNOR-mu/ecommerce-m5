@@ -33,4 +33,16 @@ public class CategoryDAO {
 
         return categories;
     }
+
+    public boolean existsById(Long id) {
+        String sql = "SELECT 1 FROM CATEGORIES WHERE ID = ?";
+        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            logger.error("Error: ", e);
+            return false;
+        }
+    }
 }
