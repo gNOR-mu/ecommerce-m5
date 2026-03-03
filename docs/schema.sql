@@ -8,7 +8,7 @@ CREATE DATABASE IF NOT EXISTS mvp_m5_gnorambuena;
 -- CON PERMISOS PARA EL CRUD BÁSICO
 CREATE USER 'mvp_m5'@'localhost' IDENTIFIED BY 'mvp_m5_1234';
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON mvp_m5_gnorambuena.* TO 'mvp_m6'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON mvp_m5_gnorambuena.* TO 'mvp_m5'@'localhost';
 
 -- *****************************
 
