@@ -10,10 +10,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO para marca
+ */
 public class BrandDAO {
     private static final Logger logger = LoggerFactory.getLogger(CategoryDAO.class);
     private final DatabaseConnection db = DatabaseConnection.getInstance();
 
+    /**
+     * Obtiene todas las marcas
+     * @return Lista de marcas
+     */
     public List<Brand> findAll() {
         List<Brand> brands = new ArrayList<>();
 
@@ -34,6 +41,11 @@ public class BrandDAO {
         return brands;
     }
 
+    /**
+     * Verifica si existe una marca por ID
+     * @param id ID de la marca
+     * @return true si existe, false en caso contrario
+     */
     public boolean existsById(Long id) {
         String sql = "SELECT 1 FROM BRANDS WHERE ID = ?";
         try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {

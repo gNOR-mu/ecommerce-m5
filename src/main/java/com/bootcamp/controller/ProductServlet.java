@@ -12,14 +12,23 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servlet para manejar las peticiones de productos
+ */
 public class ProductServlet extends HttpServlet {
 private ProductService productService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void init() throws ServletException {
         productService = new ProductService();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idParam = req.getParameter("id");
