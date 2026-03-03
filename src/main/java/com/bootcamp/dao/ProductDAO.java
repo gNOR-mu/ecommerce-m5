@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * DAO para producto
+ */
 public class ProductDAO {
     private static final Logger logger = LoggerFactory.getLogger(ProductDAO.class);
     private final DatabaseConnection db = DatabaseConnection.getInstance();
@@ -56,6 +59,10 @@ public class ProductDAO {
         return topProductDTOS;
     }
 
+    /**
+     * Obtiene todos los productos resumidos
+     * @return Lista de productos resumidos
+     */
     public List<ProductResumeDTO> findAllResume() {
         List<ProductResumeDTO> products = new ArrayList<>();
         String sql = """
@@ -81,6 +88,10 @@ public class ProductDAO {
         return products;
     }
 
+    /**
+     * Obtiene todos los productos para el panel de administración
+     * @return Lista de productos para administración
+     */
     public List<AdminProductListDTO> findAll() {
         List<AdminProductListDTO> products = new ArrayList<>();
 
@@ -116,6 +127,11 @@ public class ProductDAO {
         return products;
     }
 
+    /**
+     * Busca un producto por ID
+     * @param id ID del producto
+     * @return Producto encontrado o null
+     */
     public Product findById(Long id) {
         Product product = null;
 
@@ -161,6 +177,11 @@ public class ProductDAO {
         return product;
     }
 
+    /**
+     * Busca información de un producto por ID
+     * @param id ID del producto
+     * @return Información del producto o null
+     */
     public ProductInfoDTO findInfoById(Long id) {
         ProductInfoDTO productInfoDTO = null;
 
@@ -220,6 +241,11 @@ public class ProductDAO {
         }
     }
 
+    /**
+     * Busca productos por texto en el nombre del producto o por nombre de categoría
+     * @param searchText Texto a buscar
+     * @return Lista de productos encontrados
+     */
     public List<AdminProductListDTO> search(String searchText) {
         List<AdminProductListDTO> products = new ArrayList<>();
         String searchParam = "%" + searchText + "%";
@@ -264,6 +290,10 @@ public class ProductDAO {
 
     }
 
+    /**
+     * Guarda un nuevo producto
+     * @param product DTO del producto a guardar
+     */
     public void save(ProductFormDTO product) {
 
         String sql = """
@@ -300,6 +330,10 @@ public class ProductDAO {
         }
     }
 
+    /**
+     * Edita un producto existente
+     * @param product DTO del producto a editar
+     */
     public void edit(ProductFormDTO product) {
         String sql = """
                 UPDATE PRODUCTS SET

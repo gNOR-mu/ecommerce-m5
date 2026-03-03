@@ -2,8 +2,6 @@ package com.bootcamp.controller;
 
 import com.bootcamp.dto.product.AdminProductListDTO;
 import com.bootcamp.dto.product.ProductFormDTO;
-import com.bootcamp.model.Brand;
-import com.bootcamp.model.Category;
 import com.bootcamp.model.Product;
 import com.bootcamp.service.BrandService;
 import com.bootcamp.service.CategoryService;
@@ -22,6 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Servlet para administrar los productos como administrador
+ */
 public class AdminProductServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(AdminProductServlet.class);
     private ProductService productService;
@@ -88,6 +89,7 @@ public class AdminProductServlet extends HttpServlet {
                     product.setUrlImage(req.getParameter("urlImage"));
                     product.setDescription(req.getParameter("description"));
                     product.setShortDescription(req.getParameter("shortDescription"));
+                    product.setStock(Integer.parseInt(req.getParameter("stock")));
 
                     if (idParam != null && !idParam.isEmpty()) {
                         product.setId(Long.parseLong(idParam));
@@ -126,7 +128,7 @@ public class AdminProductServlet extends HttpServlet {
      * Realiza una búsqueda de productos, basado en los campos searchText, utiliza productList.jsp
      * @param req Request
      * @param resp Response
-     * @throws ServletException
+     * @throws ServletException 
      * @throws IOException
      */
     private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -168,6 +170,7 @@ public class AdminProductServlet extends HttpServlet {
     }
 
     /**
+     * Utiliza productForm.jsp para editar un producto existente
      *
      * @param req Request
      * @param resp Response

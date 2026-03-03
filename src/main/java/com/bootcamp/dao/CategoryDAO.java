@@ -10,10 +10,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO para categoría
+ */
 public class CategoryDAO {
     private static final Logger logger = LoggerFactory.getLogger(CategoryDAO.class);
     private final DatabaseConnection db = DatabaseConnection.getInstance();
 
+    /**
+     * Obtiene todas las categorías
+     * @return Lista de categorías
+     */
     public List<Category> findAll() {
         List<Category> categories = new ArrayList<>();
 
@@ -34,6 +41,11 @@ public class CategoryDAO {
         return categories;
     }
 
+    /**
+     * Verifica si existe una categoría por ID
+     * @param id ID de la categoría
+     * @return true si existe, false en caso contrario
+     */
     public boolean existsById(Long id) {
         String sql = "SELECT 1 FROM CATEGORIES WHERE ID = ?";
         try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
