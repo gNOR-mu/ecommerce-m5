@@ -51,8 +51,8 @@
     <!-- info sobre qué es la empresa -->
     <section class="bg-dark mt-5 p-5">
         <div class="container text-center text-white">
-            <h2> ¿Qué es ><c:out value="${initParam.ecommerceName}"/>?</h2>
-            <p>><c:out value="${initParam.ecommerceName}"/> es una plataforma ficticia de E-commerce con
+            <h2> ¿Qué es<c:out value="${initParam.ecommerceName}"/>?</h2>
+            <p><c:out value="${initParam.ecommerceName}"/> es una plataforma ficticia de E-commerce con
                 temática de productos para viajes, creada como requerimiento del
                 "Ejercicio Práctico - Desarrollo Portafolio Módulo 2" y actualizado para su implementación del módulo 5
                 para el curso DESARROLLO DE APLICACIONES FULL STACK JAVA TRAINEEv2.0
