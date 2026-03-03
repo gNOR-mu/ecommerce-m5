@@ -22,7 +22,7 @@
         <img src="${pageContext.request.contextPath}/assets/img/bg-principal-index.jpg"
              class="img-fluid img-principal ">
         <div class="card-img-overlay d-flex flex-column justify-content-center fs-3">
-            <h1>${initParam.ecommerceName}</h1>
+            <h1><c:out value="${initParam.ecommerceName}"/></h1>
             <p>Los mejores productos para que tus viajes se conviertan en
                 una experiencia inolvidable.</p>
         </div>
@@ -38,8 +38,8 @@
                     <a href="${pageContext.request.contextPath}/products?id=${product.id}" class="product-card-link">
                         <img src="${product.urlImage}" class="card-img-top product-card-img" alt="${product.name}">
                         <div class="card-body">
-                            <h5 class="card-title">${product.name}</h5>
-                            <p class="card-text">${product.shortDescription}</p>
+                            <h5 class="card-title"><c:out value="${product.name}"/></h5>
+                            <p class="card-text"><c:out value="${product.shortDescription}"/></p>
                             <span><strong><fmt:formatNumber value="${product.price}" type="currency"/></strong></span>
                         </div>
                     </a>
@@ -51,14 +51,12 @@
     <!-- info sobre qué es la empresa -->
     <section class="bg-dark mt-5 p-5">
         <div class="container text-center text-white">
-            <h2> ¿Qué es ${initParam.ecommerceName}?</h2>
-            <p>${initParam.ecommerceName} es una plataforma ficticia de E-commerce con
-                temática de productos para viajes, creada
-                como requerimiento del
+            <h2> ¿Qué es ><c:out value="${initParam.ecommerceName}"/>?</h2>
+            <p>><c:out value="${initParam.ecommerceName}"/> es una plataforma ficticia de E-commerce con
+                temática de productos para viajes, creada como requerimiento del
                 "Ejercicio Práctico - Desarrollo Portafolio Módulo 2" y actualizado para su implementación del módulo 5
-                para el curso
-                DESARROLLO DE APLICACIONES FULL STACK JAVA TRAINEE
-                v2.0</p>
+                para el curso DESARROLLO DE APLICACIONES FULL STACK JAVA TRAINEEv2.0
+                </p>
         </div>
     </section>
 
