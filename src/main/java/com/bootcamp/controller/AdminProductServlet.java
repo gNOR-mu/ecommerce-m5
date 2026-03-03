@@ -67,12 +67,14 @@ public class AdminProductServlet extends HttpServlet {
                 try {
                     Long id = Long.parseLong(idParam);
                     productService.deleteById(id);
-
+                    req.getSession().setAttribute("successMessage", "Producto eliminado correctamente.");
                 } catch (Exception e) {
                     logger.error("Error al intentar eliminar con una 'id' = '{}'", idParam, e);
-                    req.setAttribute("errorMessage", "ID inválida");
+                    req.getSession().setAttribute("errorMessage", "Error al eliminar el producto.");
                 }
+                resp.sendRedirect(req.getContextPath() + "/admin/products");
             }
+
             case "save" -> {
                 try {
                     ObjectMapper mapper = new ObjectMapper();
