@@ -20,15 +20,17 @@ Enlace del repositorio de GitHub: https://github.com/gNOR-mu/ecommerce-m5
 
 # Instrucciones de ejecución
 
-(todo)
-
 - Crear la base de datos
 - Poblar la base de datos
-- Compilar
-- Mover a Tomcat
-- etc
+- Compilar con: mvn clean package
+- Mover .war generado a tomcat/webapps
+- Luego, con el servidor Tomcat en ejecución, acceder a http://localhost:8080/mvp_m5-1.0-SNAPSHOT
 
-... Por hacer ...
+# Rutas principales
+
+- http://localhost:8080/mvp_m5-1.0-SNAPSHOT (inicio)
+- http://localhost:8080/mvp_m5-1.0-SNAPSHOT/admin/products (panel de administración de productos)
+- http://localhost:8080/mvp_m5-1.0-SNAPSHOT/products (página con todos los productos)
 
 # Propósito
 
