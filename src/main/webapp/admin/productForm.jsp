@@ -101,7 +101,7 @@
             <!--            STOCK-->
             <div class="mb-3">
                 <label class="fw-bold">Stock</label>
-                <input type="number" name="anio" value="${product.stock}" class="form-control" min="0.0" required>
+                <input type="number" name="stock" value="${product.stock}" class="form-control" min="0.0" required>
             </div>
 
             <!--            CARACTERÍSTICAS-->
